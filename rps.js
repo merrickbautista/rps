@@ -30,4 +30,10 @@ function game() {
 	}
 }
 
-game()
+choices = document.querySelectorAll('button');
+choices.forEach(choice => {
+	choice.addEventListener('click', function() {
+		playerPlay = this.id;
+		console.log(playRound(playerPlay, computerPlay()));
+	});
+});
