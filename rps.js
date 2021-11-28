@@ -1,4 +1,30 @@
-const options = ["Rock", "Paper", "Scissors"]
+const options = ["Rock", "Paper", "Scissors"];
+let playerScore = 0;
+let computerScore = 0;
+
+result = document.querySelector('#result');
+choices = document.querySelectorAll('button');
+playerScoreText = document.querySelector('#playerscore');
+computerScoreText = document.querySelector('#computerscore');
+winnerText = document.querySelector('#winner');
+
+choices.forEach(choice => {
+	choice.addEventListener('click', function() {
+		playerPlay = this.id;
+		result.innerText = playRound(playerPlay, computerPlay());
+		playerScoreText.innerText = playerScore;
+		computerScoreText.innerText = computerScore;
+		if (playerScore == 5 || computerScore == 5) {
+			let winner = (playerScore > computerScore) ? "Player" : "Computer";
+			winnerText.innerText = winner + " wins!";
+			playerScore = 0;
+			computerScore = 0;
+		}
+		else {
+			winnerText.innerText = "";
+		}
+	});
+});
 
 function computerPlay() {
 	return options[Math.floor(Math.random() * 3)]
@@ -7,19 +33,21 @@ function computerPlay() {
 function playRound(playerSelection, computerSelection) {
 	for (let i = 0; i < options.length; i++) {
 		if (playerSelection.toLowerCase() == options[i].toLowerCase()) {
-			playerSelection = options[i]
-			break
+			playerSelection = options[i];
+			break;
 		}
 	}
 	let result = options.indexOf(playerSelection) - options.indexOf(computerSelection)
 	if (!result) {
-		return `Tie! You both chose ${playerSelection}`
+		return `Tie! You both chose ${playerSelection}`;
 	}
 	else if (result == -1 || result == 2) {
-		return `You Lose! ${computerSelection} beats ${playerSelection}`
+		computerScore++;
+		return `You Lose! ${computerSelection} beats ${playerSelection}`;
 	}
 	else {
-		return `You Win! ${playerSelection} beats ${computerSelection}`
+		playerScore++;
+		return `You Win! ${playerSelection} beats ${computerSelection}`;
 	}
 }
 
@@ -29,12 +57,3 @@ function playRound(playerSelection, computerSelection) {
 		console.log(playRound(playerPlay, computerPlay()))
 	}
 }*/
-
-result = document.querySelector('#result');
-choices = document.querySelectorAll('button');
-choices.forEach(choice => {
-	choice.addEventListener('click', function() {
-		playerPlay = this.id;
-		result.innerText = playRound(playerPlay, computerPlay());
-	});
-});
