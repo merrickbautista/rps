@@ -23,17 +23,18 @@ function playRound(playerSelection, computerSelection) {
 	}
 }
 
-function game() {
+/*function game() {
 	for (let i = 0; i < 5; i++) {
 		let playerPlay = prompt("Choose Rock, Paper, or Scissors")
 		console.log(playRound(playerPlay, computerPlay()))
 	}
-}
+}*/
 
+result = document.querySelector('#result');
 choices = document.querySelectorAll('button');
 choices.forEach(choice => {
 	choice.addEventListener('click', function() {
 		playerPlay = this.id;
-		console.log(playRound(playerPlay, computerPlay()));
+		result.innerText = playRound(playerPlay, computerPlay());
 	});
 });
